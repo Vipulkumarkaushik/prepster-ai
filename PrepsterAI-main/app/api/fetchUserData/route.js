@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import { db } from '../../../utils/db'; 
 import { eq } from 'drizzle-orm'; 
-import { UserAnswer } from '../../../utils/schema';  
+import { UserAnswer } from '../../../utils/schema'; 
+
+// Build-time pe DB call rukne ke liye
+export const dynamic = 'force-dynamic'; 
 
 export async function POST(request) {
     try {
         const { userEmail } = await request.json();
-
+        
         const userAnswers = await db
             .select()
             .from(UserAnswer)
